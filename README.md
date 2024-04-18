@@ -7,15 +7,14 @@ env PYTHONPATH=. pytest
 # ...but for some reason this works:
 env PYTHONPATH=. python repro/io/some_test.py
 
-# possibly more interestingly, renaming the module from io to
-# something else also fixes it
+# I am not sure why, but adding a top-level __init__.py
+# makes pytest work:
+touch repro/__init__.py
+
+# even more interestingly, renaming the module from io to
+# something else also fixes it:
+rm repro/__init__.py  # in case you just added it
 mv repro/io repro/bar
 sed -i 's/repro.io/repro.bar/' repro/bar/some_test.py
 env PYTHONPATH=. pytest
-```
-
-### To fix
-
-```shell
-touch repro/__init__.py
 ```
