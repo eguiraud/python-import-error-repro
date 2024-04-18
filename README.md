@@ -3,7 +3,7 @@
 ```shell
 git clone git@github.com:eguiraud/python-import-error-repro.git
 cd python-import-error-repro
-pytest
+env PYTHONPATH=. pytest
 # ...but for some reason this works:
 env PYTHONPATH=. python repro/io/some_test.py
 ```
